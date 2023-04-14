@@ -40,7 +40,6 @@ function Todos() {
     console.log({ id, done })
     const { data } = await put({ url: `/todos/${id}`, body: { done } })
     if (!data) return
-
     const index = todos.findIndex(todo => todo.id === data.id)
     todos[index] = data
     setTodos([...todos])
