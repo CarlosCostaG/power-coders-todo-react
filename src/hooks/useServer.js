@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import httpService from '../services/httpService.js'
 import useAuth from './useAuth.js'
 
@@ -8,10 +9,15 @@ function useServer() {
     if (data?.user && data?.accessToken) {
       setUser({...data})
     }
+    
+    if (error) {
+      toast.error(error.message)
+    }
 
     return { data, loading, error }
   }
   
+
   return {
     get: ({ url }) => httpService({ method: 'GET', url, token }),
     post: ({ url, body }) => httpService({ method: 'POST', url, token, body }).then(handleResponse),
